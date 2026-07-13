@@ -9,7 +9,6 @@ def load_and_clean_audio(path):
     # Trim silence from the start/end (top_db controls how strict this is;
     # lower = more aggressive trimming)
     y, _ = librosa.effects.trim(y, top_db=25)
-
     # Normalize volume so loud/quiet recordings are treated fairly
     if np.max(np.abs(y)) > 0:
         y = y / np.max(np.abs(y))
@@ -23,7 +22,6 @@ def load_and_clean_audio(path):
 
     return y, sr
 
-
 def audio_to_melspectrogram(y, sr):
     """Convert a 1D audio waveform into a 2D mel spectrogram (dB scale),
     resized to a fixed shape so every sample matches for the CNN."""
@@ -35,8 +33,7 @@ def audio_to_melspectrogram(y, sr):
         n_mels=config.N_MELS,
     )
     mel_db = librosa.power_to_db(mel, ref=np.max)
-
-    # Force fixed number of time frames (pad or crop)
+    # Force fixed number of time frames
     frames = mel_db.shape[1]
     if frames < config.FIXED_FRAMES:
         pad_width = config.FIXED_FRAMES - frames
@@ -46,7 +43,6 @@ def audio_to_melspectrogram(y, sr):
 
     # Scale to 0-1 range (helps the CNN train faster/more stably)
     mel_db = (mel_db - mel_db.min()) / (mel_db.max() - mel_db.min() + 1e-8)
-
     return mel_db.astype(np.float32)
 
 
@@ -56,7 +52,6 @@ def wav_to_features(path):
     uses too, so training and prediction always see data the same way."""
     y, sr = load_and_clean_audio(path)
     return audio_to_melspectrogram(y, sr)
-
 
 def build_dataset(dataset_dir=config.DATASET_DIR, classes=config.BIRD_CLASSES):
     """Walk through dataset/<Bird_Name>/*.wav for every class, convert each
@@ -85,18 +80,12 @@ def build_dataset(dataset_dir=config.DATASET_DIR, classes=config.BIRD_CLASSES):
 
     if not X:
         raise RuntimeError(
-            "No audio files were found/processed. Did you add .wav files under "
-            "dataset/<Bird_Name>/ ? See README.md for where to download them, "
-            "or run generate_dummy_dataset.py to create fake test data first."
+            "No audio files were found/processed."
         )
-
     X = np.array(X)
     y = np.array(y)
     return X, y
-
-
 if __name__ == "__main__":
-    # Quick sanity-check mode: `python preprocess.py path/to/file.wav`
     if len(sys.argv) > 1:
         test_path = sys.argv[1]
         feats = wav_to_features(test_path)
