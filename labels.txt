@@ -1,0 +1,10 @@
+House_Sparrow
+Rock_Pigeon
+House_Crow
+Common_Myna
+Rose_ringed_Parakeet
+Asian_Koel
+Red_vented_Bulbul
+Indian_Peafowl
+White_throated_Kingfisher
+Coppersmith_Barbet
