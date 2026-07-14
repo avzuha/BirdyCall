@@ -15,8 +15,12 @@ def predict_file(model, labels, wav_path):
     features = wav_to_features(wav_path)          # shape (N_MELS, FIXED_FRAMES)
     features = features[np.newaxis, ..., np.newaxis]  # -> (1, N_MELS, FIXED_FRAMES, 1)
     probs = model.predict(features, verbose=0)[0]
-    top_idx = int(np.argmax(probs))
-    return labels[top_idx], float(probs[top_idx]) * 100, probs
+    
+    # Get top 3 indices (sorted in descending order)
+    top_3_indices = np.argsort(probs)[-3:][::-1]
+    top_3 = [(labels[idx], float(probs[idx]) * 100) for idx in top_3_indices]
+    
+    return top_3, probs
 
 def main():
     if len(sys.argv) < 2:
@@ -49,9 +53,10 @@ def main():
     for wav_path in wav_files:
         print(f"\nAudio: {wav_path}")
         try:
-            bird, confidence, probs = predict_file(model, labels, wav_path)
-            print(f"Prediction: {bird}")
-            print(f"Confidence: {confidence:.1f}%")
+            top_3, probs = predict_file(model, labels, wav_path)
+            print("Top 3 predictions:")
+            for i, (bird, confidence) in enumerate(top_3, 1):
+                print(f"  {i}. {bird}: {confidence:.1f}%")
         except Exception as e:
             print(f"[!] Could not process this file: {e}")
 
