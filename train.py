@@ -9,6 +9,8 @@ def build_model(input_shape, num_classes):
     model = models.Sequential([
         layers.Input(shape=input_shape),
 
+        # CNN layers:
+        # unchanged from original version, it extracts spacial features from the spectogram
         layers.Conv2D(16, (3, 3), activation="relu", padding="same"),
         layers.MaxPooling2D((2, 2)),
 
@@ -18,7 +20,19 @@ def build_model(input_shape, num_classes):
         layers.Conv2D(64, (3, 3), activation="relu", padding="same"),
         layers.MaxPooling2D((2, 2)),
 
-        layers.Flatten(),
+        # Long Short-Term Memory part, takes the cnn features and timesteos as inputs, LSTM1 analyzes the 1024 features across the 21 time steps, outputs 128 features per step, then LSTM2, analyzes 128 features across 21 time steps, outputs 64 feature vector
+        # Reshape for LSTM: (16, 21, 64) -> (21 time_steps, 1024 features)
+        layers.Reshape((21, 16*64)),
+
+        # LSTM layers: learn temporal patterns in bird calls
+        # LSTM1
+        layers.LSTM(128, return_sequences=True),
+        layers.Dropout(0.2),
+        # LSTM2
+        layers.LSTM(64),
+        layers.Dropout(0.2),
+
+        # Dense layers: classification head
         layers.Dense(64, activation="relu"),
         layers.Dropout(0.3),
         layers.Dense(num_classes, activation="softmax"),
