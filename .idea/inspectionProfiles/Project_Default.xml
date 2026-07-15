@@ -1,0 +1,66 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="certifi" />
+          <option value="charset-normalizer" />
+          <option value="click" />
+          <option value="colorama" />
+          <option value="deprecation" />
+          <option value="dotenv" />
+          <option value="exceptiongroup" />
+          <option value="faiss-cpu" />
+          <option value="filelock" />
+          <option value="fsspec" />
+          <option value="h11" />
+          <option value="h2" />
+          <option value="hpack" />
+          <option value="httpcore" />
+          <option value="httpx" />
+          <option value="huggingface-hub" />
+          <option value="hyperframe" />
+          <option value="Jinja2" />
+          <option value="joblib" />
+          <option value="MarkupSafe" />
+          <option value="mpmath" />
+          <option value="networkx" />
+          <option value="numpy" />
+          <option value="packaging" />
+          <option value="pillow" />
+          <option value="postgrest" />
+          <option value="PyJWT" />
+          <option value="PyPDF2" />
+          <option value="python-dateutil" />
+          <option value="python-dotenv" />
+          <option value="python-multipart" />
+          <option value="PyYAML" />
+          <option value="realtime" />
+          <option value="regex" />
+          <option value="requests" />
+          <option value="safetensors" />
+          <option value="scikit-learn" />
+          <option value="scipy" />
+          <option value="sentence-transformers" />
+          <option value="six" />
+          <option value="storage3" />
+          <option value="StrEnum" />
+          <option value="supabase" />
+          <option value="supabase_auth" />
+          <option value="supabase_functions" />
+          <option value="sympy" />
+          <option value="threadpoolctl" />
+          <option value="tokenizers" />
+          <option value="torch" />
+          <option value="tqdm" />
+          <option value="transformers" />
+          <option value="urllib3" />
+          <option value="uvicorn" />
+          <option value="websockets" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
