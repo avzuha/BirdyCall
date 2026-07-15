@@ -13,6 +13,7 @@ The pipeline has four stages:
 
 A separately recorded microphone clip is preprocessed the same way and run through the trained model to get a prediction.
 
+### **A GUI is also available**, you can also run this directly by just installing the required libraries and running main.py, which sets up the project and uses its GUI version
 ## 2. Setup Instructions
 
 1. Install [Python](https://www.python.org/downloads/) 
@@ -130,7 +131,7 @@ Once the dataset is downloaded and the model is trained, **the entire prediction
 - The model only recognizes the species it was trained on; anything else (other birds, human speech, background noise) will still be forced into one of those categories with some confidence score, which can be misleading.
 - Accuracy depends heavily on training data quality and diversity, a class trained on few or narrow-source recordings will generalize poorly to new environments.
 - Real-world background noise (traffic, wind, overlapping bird calls) was not systematically modeled during training and may reduce accuracy versus clean recordings.
-- Not intended for scientific or conservation-grade species identification, this is an educational/prototype system.
+- Can be used for scientific or conservation-grade species identification, if trained by the user on larger datasets preferaably kaggle's BirdCleF 2024 datasets or the similar, with a few minor modifications.
 
 ## Attribution
 
