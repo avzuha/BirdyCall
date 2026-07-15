@@ -1,7 +1,7 @@
 # BirdyCall
 
 Offline bird sound recognition. Records a short clip of a bird call, runs it through a locally-trained CNN-LSTM neural network, and predicts which bird species it is, no internet connection required at prediction time.
-
+Check out the demo video of the app here : https://drive.google.com/drive/folders/1jZiXwdnv7oYauz6fwS8dbtfxEa8TM1sg?usp=sharing
 ## 1. Overview
 
 The pipeline has four stages:
